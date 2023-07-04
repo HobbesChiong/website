@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {FaBars, FaTimes} from 'react-icons/fa'
+import {Link} from 'react-scroll'
+// imported link lets us smooth scroll to a div element from a button click
+
 
 const NavBar = () => {
 
     const [nav, setNav] = React.useState(false)
 
     const links = [
+        // the link variable is the name of the div in the component
         {
             id: 1,
             link: 'home'
@@ -34,16 +38,20 @@ const NavBar = () => {
                 <h1 className = "text-5xl font-signature ml-2">Hobbes</h1>
             </div>
 
+            {/* this list is for the nav bar with words header */}
             <ul className="hidden md:flex">
                 {links.map(({ id, link }) => (
                     <li 
                     key = {id}
                     className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
                     >
-                    {link}
+                    <Link to={link} smooth druation={500}>
+                        {link}
+                    </Link>
                     </li>
                 ))}
             </ul>
+            {/* this nav bar is for when its condensed and you have to click the icon */}
             <div onClick={() => setNav(!nav)} className = "cursor-pointer pr-4 z-10 text-gray-500 md:hidden">
                 {nav ? <FaTimes size ={30}/> : <FaBars size = {30}/>}
             </div>
@@ -55,7 +63,9 @@ const NavBar = () => {
                     key = {id}
                     className="px-4 cursor-pointer capitalie py-6 text-4xl"
                     >
-                    {link}
+                    <Link onClick={() => setNav(!nav)} to={link} smooth druation={500}>
+                        {link}
+                    </Link>
                     </li>
                 ))}
 
